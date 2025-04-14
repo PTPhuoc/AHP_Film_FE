@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function PairOfPlan() {
+export default function PairOfCriteria() {
   return (
-    <div>PairOfPlan</div>
+    <div>PairOfCriteria</div>
   )
 }

@@ -1,6 +1,8 @@
 import { Dosis } from "next/font/google";
 import "./globals.css";
 import HeadBar from "./HeadBar";
+import { Context } from "./Context";
+import Warning from "./Warning";
 
 export const DosisFont = Dosis({
   subsets: ["vietnamese"],
@@ -15,9 +17,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`antialiased h-screen flex flex-col text-[20px] ${DosisFont.className}`}>
-        <HeadBar />
-        {children}
+      <body
+        className={`antialiased h-screen flex flex-col overflow-hidden text-[20px] ${DosisFont.className}`}
+      >
+        <Context>
+          <HeadBar />
+          <Warning/>
+          {children}
+        </Context>
       </body>
     </html>
   );

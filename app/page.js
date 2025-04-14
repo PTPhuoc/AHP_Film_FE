@@ -2,7 +2,7 @@ import HomePage from "./HomePage";
 
 export default function Home() {
   return (
-    <div>
+    <div className="w-full h-full">
       <HomePage></HomePage>
     </div>
   );
