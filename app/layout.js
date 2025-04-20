@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`antialiased h-screen flex flex-col overflow-hidden text-[20px] ${DosisFont.className}`}
+        className={`antialiased h-screen flex flex-col overflow-auto scroll-box text-[20px] ${DosisFont.className}`}
       >
         <Context>
           <HeadBar />

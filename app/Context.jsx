@@ -46,7 +46,7 @@ export function Context({ children }) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ caculatorId, setCaculatorId, warningValue, setWarningValue }}>
+    <UserContext.Provider value={{ caculatorId, setCaculatorId, warningValue, setWarningValue, getIdCaculator }}>
       {children}
     </UserContext.Provider>
   );

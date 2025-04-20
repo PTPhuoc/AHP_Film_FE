@@ -42,7 +42,7 @@ export default function Warning() {
                   setWarningValue({
                     ...warningValue,
                     handle: "Cancel",
-                    isOpen: false,
+                    isOpen: false
                   });
                 }}
                 className="bg-white text-[#374B9E] py-2 w-[40%] rounded-2xl shadow border-2 border-[#374B9E] scale-100 duration-200 ease-in hover:bg-[#374B9E] hover:text-white active:scale-90"
