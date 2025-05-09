@@ -3,6 +3,7 @@ import "./globals.css";
 import HeadBar from "./HeadBar";
 import { Context } from "./Context";
 import Warning from "./Warning";
+import Root from "./Root";
 
 export const DosisFont = Dosis({
   subsets: ["vietnamese"],
@@ -21,9 +22,7 @@ export default function RootLayout({ children }) {
         className={`antialiased h-screen flex flex-col overflow-auto scroll-box text-[20px] ${DosisFont.className}`}
       >
         <Context>
-          <HeadBar />
-          <Warning/>
-          {children}
+          <Root children={children} />
         </Context>
       </body>
     </html>

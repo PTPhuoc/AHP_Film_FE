@@ -9,7 +9,7 @@ import LoaderPage from "../LoaderPage";
 import { useRouter } from "next/navigation";
 
 export default function PairOfCriteria() {
-  const { caculatorId, warningValue, setWarningValue } =
+  const { caculatorId, warningValue, setWarningValue, isWindow, setIsWindow } =
     useContext(UserContext);
   const [listCriteria, setListCriteria] = useState([]);
   const [matrix, setMatrix] = useState([]);
@@ -23,7 +23,7 @@ export default function PairOfCriteria() {
   });
   const [waitObject, setWaitObject] = useState({
     matrix: "Pending",
-    criteria: "Pending"
+    criteria: "Pending",
   });
 
   const route = useRouter();
@@ -129,6 +129,7 @@ export default function PairOfCriteria() {
     if (caculatorId) {
       getCriteria();
       getMatrixCriteria();
+      setIsWindow({ ...isWindow, load: false });
     }
   }, [caculatorId]);
 
@@ -326,7 +327,10 @@ export default function PairOfCriteria() {
       </div>
       <div className="fixed w-full flex justify-between right-0 bottom-0 p-5">
         <button
-          onClick={() => route.push("/")}
+          onClick={() => {
+            setIsWindow({ ...isWindow, load: true });
+            route.push("/visualization");
+          }}
           className="bg-[#374B9E] flex justify-between items-center text-white fill-white py-3 px-5 rounded-2xl shadow border-2 border-[#374B9E] scale-100 duration-200 ease-in hover:bg-white hover:text-[#374B9E] hover:fill-[#374B9E] active:scale-90"
         >
           <svg
@@ -341,6 +345,7 @@ export default function PairOfCriteria() {
         <button
           onClick={() => {
             if (resultMatrix.result.length > 0 && resultMatrix.CR <= 0.1) {
+              setIsWindow({ ...isWindow, load: true });
               route.push("/pair_of_plan");
             } else {
               setWarningValue({

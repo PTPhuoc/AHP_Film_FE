@@ -9,8 +9,13 @@ import CaculatorPlan from "./CaculatorPlan";
 import ResultChart from "./ResultChart";
 
 export default function PairOfPlan() {
-  const { caculatorId, setWarningValue, getIdCaculator } =
-    useContext(UserContext);
+  const {
+    caculatorId,
+    setWarningValue,
+    getIdCaculator,
+    isWindow,
+    setIsWindow,
+  } = useContext(UserContext);
   const [listPlan, setListPlan] = useState([]);
   const [listCriteria, setListCriteria] = useState([]);
   const [waitObject, setWaitObject] = useState({
@@ -140,7 +145,10 @@ export default function PairOfPlan() {
             )}
           <div className="fixed w-full flex justify-between right-0 bottom-0 p-5">
             <button
-              onClick={() => route.push("/pair_of_criteria")}
+              onClick={() => {
+                setIsWindow({ ...isWindow, load: true });
+                route.push("/pair_of_criteria");
+              }}
               className="bg-[#374B9E] flex justify-between items-center text-white fill-white py-3 px-5 rounded-2xl shadow border-2 border-[#374B9E] scale-100 duration-200 ease-in hover:bg-white hover:text-[#374B9E] hover:fill-[#374B9E] active:scale-90"
             >
               <svg
@@ -159,6 +167,7 @@ export default function PairOfPlan() {
                   step === listCriteria.length + 1
                 ) {
                   getIdCaculator(undefined);
+                  setIsWindow({ ...isWindow, load: true });
                   route.push("/");
                 } else {
                   setWarningValue({

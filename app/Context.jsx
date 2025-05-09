@@ -2,11 +2,15 @@
 
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { syncFunc } from "./functions/handleFunc";
 
 export const UserContext = createContext();
 
 export function Context({ children }) {
   const [caculatorId, setCaculatorId] = useState("");
+  const [isWindow, setIsWindow] = useState({
+    load: true,
+  });
 
   const [warningValue, setWarningValue] = useState({
     for: "",
@@ -15,8 +19,8 @@ export function Context({ children }) {
     isOpen: false,
     type: "YorN",
     handle: "Pending",
-    object: ""
-  })
+    object: "",
+  });
 
   const getIdCaculator = (id) => {
     axios
@@ -30,23 +34,54 @@ export function Context({ children }) {
         } else {
           window.localStorage.setItem("caculatorId", "");
           setCaculatorId("");
-          alert(rs.data.message ? rs.data.message : rs.data.error);
+          setWarningValue({
+            for: "ServerError",
+            title: "Phản hồi server",
+            content: rs.data.message ? rs.data.message : rs.data.error,
+            type: "N",
+            handle: "Pending",
+            isOpen: true,
+          });
         }
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    const id = window.localStorage.getItem("caculatorId");
-    if (id) {
-      getIdCaculator(id);
-    } else {
-      getIdCaculator("");
-    }
+    let getCaculatorId = "";
+  
+    const fetchId = async () => {
+      const result = await syncFunc(() => {
+        const id = window.localStorage.getItem("caculatorId");
+        if (id) {
+          getCaculatorId = id;
+          return true;
+        }
+        return false;
+      }, 3, 500);
+  
+      if (result && getCaculatorId) {
+        getIdCaculator(getCaculatorId);
+      } else {
+        getIdCaculator("");
+      }
+    };
+  
+    fetchId();
   }, []);
 
   return (
-    <UserContext.Provider value={{ caculatorId, setCaculatorId, warningValue, setWarningValue, getIdCaculator }}>
+    <UserContext.Provider
+      value={{
+        caculatorId,
+        setCaculatorId,
+        warningValue,
+        setWarningValue,
+        getIdCaculator,
+        isWindow,
+        setIsWindow,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
