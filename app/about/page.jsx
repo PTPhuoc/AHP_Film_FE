@@ -2,8 +2,8 @@ import React from "react";
 
 export default function About() {
   return (
-    <div className="w-full flex flex-grow justify-center items-center">
-      <div className="w-[50%] h-[90%] flex flex-col items-center justify-center bg-white px-5 gap-10 rounded-2xl shadow">
+    <div className="w-full p-5 flex flex-grow justify-center items-center">
+      <div className="w-[50%] h-[760px] flex flex-col items-center justify-center bg-white px-5 gap-10 rounded-2xl shadow">
         <div>
           <p className="text-[30px] font-bold">
             NHÓM 3 - CNPM 1 - HỆ HỔ TRỢ RA QUYẾT ĐỊNH
@@ -18,13 +18,13 @@ export default function About() {
             <p>PHAN TÂN PHƯỚC - 1050080070</p>
           </div>
           <div>
-            <p>PHẠM NGỌC HÀ MINH - 10500800</p>
+            <p>PHẠM NGỌC HÀ MINH - 1050080061</p>
           </div>
           <div>
-            <p>LÊ VŨ ANH KIỆT - 10500800</p>
+            <p>LÊ VŨ ANH KIỆT - 1050080065</p>
           </div>
           <div>
-            <p>LÊ QUỐC VIỆT - 10500800</p>
+            <p>LÊ QUỐC VIỆT - 1050080083</p>
           </div>
         </div>
         <div className="w-full">

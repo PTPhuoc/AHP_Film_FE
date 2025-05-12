@@ -97,6 +97,7 @@ export default function PairOfPlan() {
       getCriteria();
       getPlan();
       setWaitObject({ ...waitObject, loadData: "Success" });
+      setIsWindow({...isWindow, load: false})
     }
   }, [caculatorId]);
 

@@ -25,7 +25,7 @@ export default function ColumnChart({ name, keyName, listData, className }) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey={keyName} fill="#374B9E" /> 
+          <Bar dataKey={keyName} fill="#374B9E" name={"Giá trị"}/> 
         </BarChart>
       </ResponsiveContainer>
     </div>

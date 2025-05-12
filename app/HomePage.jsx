@@ -1,13 +1,11 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import InputDefault from "./InputDefault";
 import { UserContext } from "./Context";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import LoaderPage from "./LoaderPage";
 import InputListSearch from "./InputListSearch";
-import { syncFunc } from "./functions/handleFunc";
 
 export default function Home() {
   const {
