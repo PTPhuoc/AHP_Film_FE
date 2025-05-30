@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { readExcel } from "../functions/handleFunc";
+import { UserContext } from "../Context";
 
 export default function TableFlexible({
   nameColumn,
@@ -8,9 +10,8 @@ export default function TableFlexible({
   valueMatrix,
   tableName,
 }) {
-  const [waitObject, setWaitObject] = useState({
-    loadData: "Pending",
-  });
+  const { setWarningValue } = useContext(UserContext);
+  const inputFileRef = useRef(null);
   const calculateColumnSums = (matrix) => {
     const clone = [...matrix];
     for (let j = 0; j < nameColumn.length; j++) {
@@ -83,6 +84,19 @@ export default function TableFlexible({
       }
       return calculateColumnSums(clone);
     });
+  };
+
+  const checkSame = (array, targetArray) => {
+    if (array.length > 0 && targetArray.length > 0) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].name.toLowerCase() !== targetArray[i].toLowerCase()) {
+          return false;
+        }
+      }
+      return true;
+    } else {
+      return false;
+    }
   };
 
   useEffect(() => {
@@ -197,7 +211,53 @@ export default function TableFlexible({
           })}
         </div>
       </div>
-      <div>
+      <div className="flex gap-5 justify-center">
+        <button
+          onClick={() => inputFileRef.current.click()}
+          className="bg-green-500 text-white py-3 px-5 rounded-2xl shadow border-2 border-green-500 scale-100 duration-200 ease-in hover:bg-white hover:text-green-500 active:scale-90"
+        >
+          Dùng Excel
+        </button>
+        <input
+          ref={inputFileRef}
+          hidden={true}
+          type="file"
+          accept=".xlsx, .xls"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            readExcel(file)
+              .then((rs) => {
+                if (rs.matrix) {
+                  let same = checkSame(nameColumn, rs.labels)
+                  if (same) {
+                    setMatrix(addNewRow(rs.matrix));
+                    matrixChange(addNewRow(rs.matrix))
+                  } else {
+                    setWarningValue({
+                      for: "NotSameMatrix",
+                      title: "Cảnh báo",
+                      content: "Tên cặp ma trận không giống nhau",
+                      isOpen: true,
+                      type: "N",
+                      handle: "Pending",
+                      object: "",
+                    });
+                  }
+                }else{
+                  setWarningValue({
+                      for: "NotSameMatrix",
+                      title: "Cảnh báo",
+                      content: rs,
+                      isOpen: true,
+                      type: "N",
+                      handle: "Pending",
+                      object: "",
+                    });
+                }
+              })
+              .catch((err) => console.log(err));
+          }}
+        />
         <button
           onClick={() => {
             matrixChange(finalMatrix);

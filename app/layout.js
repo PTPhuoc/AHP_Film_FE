@@ -1,8 +1,6 @@
 import { Dosis } from "next/font/google";
 import "./globals.css";
-import HeadBar from "./HeadBar";
 import { Context } from "./Context";
-import Warning from "./Warning";
 import Root from "./Root";
 
 export const DosisFont = Dosis({

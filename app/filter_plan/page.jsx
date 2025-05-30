@@ -25,12 +25,12 @@ export default function page() {
   const route = useRouter();
 
   const columnMap = {
-    "Thể loại": "category",
-    "Đánh giá IMDb": "imdb",
-    "Thời lượng": "duration",
-    "Đạo diễn": "director",
-    "Đề cử & Giải thưởng": "awards",
-    "Quốc gia": "nation",
+    "Thể Loại": "category",
+    "Đánh Giá IMDb": "imdb",
+    "Thời Lượng": "duration",
+    "Đạo Diễn": "director",
+    "Đề Cử & Giải Thưởng": "awards",
+    "Quốc Gia": "nation",
     "Tên phương án": "name",
     Mã: "id",
   };

@@ -340,8 +340,8 @@ export default function Home() {
                 title: "Lấy mặc định tiêu chí",
                 content:
                   "Bạn có chắc lấy tiêu chí mặc định." +
-                  (listCriteria.length > 0 &&
-                    "Các tiêu chí bạn đã nhập sẽ bị xóa"),
+                  (listCriteria.length > 0 ?
+                    "Các tiêu chí bạn đã nhập sẽ bị xóa" : ""),
                 handle: "Pending",
                 isOpen: true,
               })
@@ -527,7 +527,7 @@ export default function Home() {
         <button
           onClick={() => {
             if (
-              (listCriteria.length > 2 || listPlan.length > 0) &&
+              (listCriteria.length > 2 || listPlan.length > 2) &&
               listCriteria.length <= 9
             ) {
               setIsWindow({ ...isWindow, load: true });

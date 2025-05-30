@@ -125,6 +125,8 @@ export default function PairOfCriteria() {
       .catch((err) => console.log(err));
   };
 
+  
+
   useEffect(() => {
     if (caculatorId) {
       getCriteria();
